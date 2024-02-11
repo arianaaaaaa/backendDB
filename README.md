@@ -1,4 +1,4 @@
-Spring Boot API Program
+Customer API Program
 =======================
 
 This project implements a simple API using Spring Boot. It provides endpoints for managing customers and their addresses.
