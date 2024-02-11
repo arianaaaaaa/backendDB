@@ -24,7 +24,8 @@ public interface AddressRepository extends CrudRepository<Address, Long> {
         }
         return addressList;
     }
-    default ResponseEntity<String> updateAddressById(Long addressId, String address){
+
+    default ResponseEntity<String> updateAddressById(Long addressId, String address) {
         Address addressToUpdate = findById(addressId).orElse(null);
         if (addressToUpdate == null) {
             return new ResponseEntity<>("No address with id " + addressId + " was found", HttpStatus.NOT_FOUND);

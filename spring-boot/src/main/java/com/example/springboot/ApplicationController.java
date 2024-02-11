@@ -30,9 +30,9 @@ public class ApplicationController {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer != null) {
             addressRepository.save(new Address(customer.getId(), address));
-            return new ResponseEntity<>("Address added to customer with id " + id,HttpStatus.CREATED);
+            return new ResponseEntity<>("Address added to customer with id " + id, HttpStatus.CREATED);
         }
-        return new ResponseEntity<>("Address with id " + id + " not found",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Address with id " + id + " not found", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value = "/get_customer_by_id")
