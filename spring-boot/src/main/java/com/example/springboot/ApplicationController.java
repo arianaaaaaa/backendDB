@@ -18,18 +18,21 @@ public class ApplicationController {
     private final ApplicationService applicationService;
 
     @PostMapping(value = "/add_customer")
-    public void postCustomer(@RequestBody CustomerDto customer) {
+    public ResponseEntity<String> postCustomer(@RequestBody CustomerDto customer) {
         Customer savedCustomer = new Customer(customer.getName(), customer.getLastName(), customer.getAge(), customer.getEmail());
         customerRepository.save(savedCustomer);
         addressRepository.save(new Address(savedCustomer.getId(), customer.getAddress()));
+        return new ResponseEntity<>("Customer with id " + savedCustomer.getId() + " was created ", HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/add_address_to_customer")
-    public void postAddress(@RequestParam(name = "id") Long id, @RequestParam(name = "address") String address) {
+    public ResponseEntity<String> postAddress(@RequestParam(name = "id") Long id, @RequestParam(name = "address") String address) {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer != null) {
             addressRepository.save(new Address(customer.getId(), address));
+            return new ResponseEntity<>("Address added to customer with id " + id,HttpStatus.CREATED);
         }
+        return new ResponseEntity<>("Address with id " + id + " not found",HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value = "/get_customer_by_id")
@@ -43,8 +46,8 @@ public class ApplicationController {
 
     @GetMapping(value = "/get_all_customers")
     public List<FinalCustomerDto> getAllCustomers() {
-        Iterable<Customer> customers = customerRepository.findAll();
-        return applicationService.getFinalCustomers(customers);
+        return applicationService.getFinalCustomers(customerRepository.findAll());
+
     }
 
     @GetMapping("/search")
@@ -52,7 +55,7 @@ public class ApplicationController {
         if (name == null && lastName == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(applicationService.searchCustomerByValue(name, lastName), HttpStatus.OK);
+        return applicationService.checkIfCustomerFound(name, lastName);
     }
 
     @GetMapping("/update_email")

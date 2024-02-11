@@ -21,13 +21,4 @@ public class FinalCustomerDto {
         this.email = email;
         this.addresses = addresses;
     }
-
-    public FinalCustomerDto() {
-        this.id = null;
-        this.name = null;
-        this.lastName = null;
-        this.age = 0;
-        this.email = null;
-        this.addresses = null;
-    }
 }

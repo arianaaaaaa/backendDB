@@ -1,6 +1,9 @@
 package com.example.springboot;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,5 +36,12 @@ public class ApplicationService {
             return getFinalCustomers(customerRepository.findAllByLastName(lastName));
         }
         return getFinalCustomers(customerRepository.findAllByNameAndLastName(name, lastName));
+    }
+    ResponseEntity<List<FinalCustomerDto>> checkIfCustomerFound(String name, String lastName){
+        List<FinalCustomerDto> customer = searchCustomerByValue(name, lastName);
+        if(customer.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 }

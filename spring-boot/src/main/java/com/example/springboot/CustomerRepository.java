@@ -54,7 +54,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
     default ResponseEntity<String> updateEmailById(Long id, String email) {
         Customer customer = findById(id).orElse(null);
         if (customer == null) {
-            return new ResponseEntity<>("No customer with id " + id + " was found", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("No customer with id " + id + " was found", HttpStatus.NOT_FOUND);
         }
         customer.setEmail(email);
 
