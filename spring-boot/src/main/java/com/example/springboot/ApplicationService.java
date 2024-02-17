@@ -46,14 +46,13 @@ public class ApplicationService {
     }
 
     Matcher parseAddress(String address) {
-        //In the case of a street name containing a number, errors in the parsing could occur.
         Pattern pattern = Pattern.compile(
-                "([A-Za-z-]+\\s?[A-Za-z-]+?\\s?[A-Za-z-]+?\\s?[A-Za-z-]+?\\s?[A-Za-z-]+?)" +
+                "([A-Za-z-0-9']+\\s?[A-Za-z-0-9']+?\\s?[A-Za-z-0-9']+?\\s?[A-Za-z-0-9']+?\\s?[A-Za-z-0-9']+?)" +
                         "\\s(\\d+)" +
                         "\\s?([A-Za-z]{1,2})?" +
                         "\\s?(\\d{1,2})?" +
                         ",\\s?(\\d{4}\\s?[A-Za-z]{2})" +
-                        "\\s?(\\w+\\s?\\w+?\\s?\\w+?\\s?\\w+?)");
+                        "\\s?(.*)");
         return pattern.matcher(address);
     }
 

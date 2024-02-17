@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
+
     List<Customer> getCustomerByNameIgnoreCase(String name);
 
     List<Customer> getCustomerByLastNameIgnoreCase(String lastName);

@@ -64,15 +64,15 @@ class ApplicationServiceTest {
 
     @Test
     void parseAddressSuccess() {
-        String address = "Charley Tooropgracht 491, 1112ZJ Diemen";
+        String address = "1rst Nice-Street 491 b1, 1112ZJ Diemen Zuid";
         Matcher m = sut.parseAddress(address);
         assertThat(m.find()).isTrue();
-        assertThat(m.group(1)).isEqualTo("Charley Tooropgracht");
+        assertThat(m.group(1)).isEqualTo("1rst Nice-Street");
         assertThat(m.group(2)).isEqualTo("491");
-        assertThat(m.group(3)).isNull();
-        assertThat(m.group(4)).isNull();
+        assertThat(m.group(3)).isEqualTo("b");
+        assertThat(m.group(4)).isEqualTo("1");
         assertThat(m.group(5)).isEqualTo("1112ZJ");
-        assertThat(m.group(6)).isEqualTo("Diemen");
+        assertThat(m.group(6)).isEqualTo("Diemen Zuid");
     }
 
     @Test
