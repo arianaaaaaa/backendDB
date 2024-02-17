@@ -5,27 +5,28 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @Table(name = "customer")
 public class Customer {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "age")
     private int age;
 
-    @Column(name = "email")
     private String email;
+
+    @OneToMany
+    @JoinColumn(name = "customer_id")
+    private List<Address> address;
 
     public Customer(String name, String lastName, int age, String email) {
         this.name = name;

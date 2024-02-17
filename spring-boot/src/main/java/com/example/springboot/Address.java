@@ -1,9 +1,6 @@
 package com.example.springboot;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,16 +12,34 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
+    @Column(name = "customer_id")
     private long customerId;
 
-    private String addressString;
+    private String streetName;
 
-    public Address(long customerId, String addressString) {
-        this.customerId = customerId;
-        this.addressString = addressString;
-    }
+    private Integer number;
+
+    private String letter;
+
+    private Integer toevoeging;
+
+    private String postCode;
+
+    private String city;
+
 
     public Address() {
+    }
+
+    public Address(
+            long customerId, String streetName, Integer number, String letter,
+            Integer toevoeging, String postCode, String city) {
+        this.customerId = customerId;
+        this.streetName = streetName;
+        this.number = number;
+        this.letter = letter;
+        this.toevoeging = toevoeging;
+        this.postCode = postCode;
+        this.city = city;
     }
 }

@@ -17,20 +17,6 @@ Endpoints
 *   **Description**: Adds a new customer with the provided details. Also adds the customer's address.
     
 
-### Add Address to Customer
-
-*   **Method**: POST
-    
-*   **URL**: **/add_address_to_customer**
-    
-*   **Request Parameters**:
-    
-    *   **id**: Customer ID (Long)
-        
-    *   **address**: Address (String)
-        
-*   **Description**: Adds an address to an existing customer identified by their ID.
-    
 
 ### Get Customer by ID
 
@@ -71,7 +57,7 @@ Endpoints
 
 ### Update Customer Email
 
-*   **Method**: GET
+*   **Method**: PUT
     
 *   **URL**: **/update_email**
     
@@ -86,7 +72,7 @@ Endpoints
 
 ### Update Customer Address
 
-*   **Method**: GET
+*   **Method**: PUT
     
 *   **URL**: **/update_address**
     
